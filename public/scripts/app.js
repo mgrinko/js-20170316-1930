@@ -1,5 +1,5 @@
 'use strict';
 
-new PhonesPage({
+let page = new PhonesPage({
   el: document.body
 });

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script src="scripts/app.js" defer></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="app.css">
+
+
+</head>
+<body>
+
+<div>
+  <div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2">
+          <!--Sidebar content-->
+
+          <div data-component="search">
+            <p>
+              Search:
+              <input>
+            </p>
+          </div>
+
+
+          <div data-component="sorter">
+            <p>
+              Sort by:
+              <select>
+                <option value="name">Alphabetical</option>
+                <option value="age">Newest</option>
+              </select>
+            </p>
+          </div>
+
+          <div data-component="shopping-cart">
+            <ul>
+              <li>phone1</li>
+              <li>phone2</li>
+              <li>phone3</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="col-md-10">
+          <!--Body content-->
+
+          <div data-component="phone-viewer" class="js-hidden">123123</div>
+
+          <div data-component="phone-catalogue">
+            <ul class="phones">
+              <li class="thumbnail">
+                <a href="#!/phones/motorola-xoom-with-wi-fi" class="thumb">
+                  <img alt="Motorola XOOM™ with Wi-Fi" src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
+                </a>
+                <a href="#!/phones/motorola-xoom-with-wi-fi">Motorola XOOM™ with Wi-Fi</a>
+                <p>The Next, Next Generation
+
+                  Experience the future with Motorola XOOM with Wi-Fi, the world's first tablet powered by Android 3.0 (Honeycomb).</p>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

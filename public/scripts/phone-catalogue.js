@@ -193,10 +193,19 @@ class PhoneCatalogue {
       return;
     }
 
-    let phoneItem = phoneLink.closest('[data-element="phone-item"]');
-    let phoneId = phoneItem.dataset.phoneId;
+    let phoneElement = phoneLink.closest('[data-element="phone-item"]');
+    let phoneId = phoneElement.dataset.phoneId;
 
-    alert(phoneId);
+    let selectedPhone = phonesFromServer
+      .filter(phone => phone.id === phoneId)
+      [0];
+
+    var myEvent = new CustomEvent('phoneSelected', {
+      detail: phoneId
+    });
+
+    this._el.dispatchEvent(myEvent);
+
   }
 
   _getPhones() {

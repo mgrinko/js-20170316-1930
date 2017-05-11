@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Title</title>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js" defer></script>
   <script src="scripts/phone-catalogue.js" defer></script>
   <script src="scripts/phones-page.js" defer></script>
   <script src="scripts/shopping-cart.js" defer></script>
@@ -42,7 +43,9 @@
             </p>
           </div>
 
-          <div data-component="shopping-cart"></div>
+          <div data-component="shopping-cart">
+
+          </div>
 
         </div>
 
@@ -58,6 +61,20 @@
     </div>
   </div>
 </div>
+
+<script type="text/template" id="shopping-cart-template">
+  <h4>Shopping cart</h4>
+  <ul>
+    <% items.forEach((item) => { %>
+      <li><%= item.id %></li>
+    <% }); %>
+  </ul>
+
+  <% if (items.length === 0) { %>
+    <p>No items yet</p>
+  <% } %>
+
+</script>
 
 
 </body>

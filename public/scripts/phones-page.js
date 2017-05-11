@@ -5,7 +5,8 @@ class PhonesPage {
     this._el = options.el;
 
     this._cart = new ShoppingCart({
-      el: this._el.querySelector('[data-component="shopping-cart"]')
+      el: this._el.querySelector('[data-component="shopping-cart"]'),
+      template: document.querySelector('#shopping-cart-template').innerHTML
     });
 
     this._catalogue = new PhoneCatalogue({

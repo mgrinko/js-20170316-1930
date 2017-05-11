@@ -174,6 +174,14 @@ class PhoneCatalogue {
     this._el.removeEventListener(eventName, handler);
   }
 
+  trigger(eventName, data) {
+    var myEvent = new CustomEvent(eventName, {
+      detail: data
+    });
+
+    this._el.dispatchEvent(myEvent);
+  }
+
   render(phones) {
     let html = '<ul class="phones">';
 
@@ -204,15 +212,11 @@ class PhoneCatalogue {
     let phoneElement = phoneLink.closest('[data-element="phone-item"]');
     let phoneId = phoneElement.dataset.phoneId;
 
-    let selectedPhone = phonesFromServer
-      .filter(phone => phone.id === phoneId)
-      [0];
+    // let selectedPhone = phonesFromServer
+    //   .filter(phone => phone.id === phoneId)
+    //   [0];
 
-    var myEvent = new CustomEvent('phoneSelected', {
-      detail: phoneId
-    });
-
-    this._el.dispatchEvent(myEvent);
+    this.trigger('phoneSelected', phoneId)
   }
 
   _getPhones() {

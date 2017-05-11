@@ -3,6 +3,7 @@
 class ShoppingCart {
   constructor(options) {
     this._el = options.el;
+    this._template = options.template;
 
     this._items = [];
 
@@ -10,15 +11,10 @@ class ShoppingCart {
   }
 
   render() {
-    let html = '<h4>Shopping cart</h4>';
-
-    html += '<ul>';
-
-    this._items.forEach((item) => {
-      html += `<li>${ item.id }</li>`;
+    let templateFunction = _.template(this._template);
+    let html = templateFunction({
+      items: this._items
     });
-
-    html += '</ul>';
 
     this._el.innerHTML = html;
   }

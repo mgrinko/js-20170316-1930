@@ -160,6 +160,7 @@ let phonesFromServer = [
 class PhoneCatalogue {
   constructor(options) {
     this._el = options.el;
+    this._template = document.querySelector('#phone-catalogue-template').innerHTML;
 
     this.render(this._getPhones());
 
@@ -183,21 +184,10 @@ class PhoneCatalogue {
   }
 
   render(phones) {
-    let html = '<ul class="phones">';
-
-    phones.forEach((phone) => {
-      html += `
-        <li class="thumbnail" data-element="phone-item" data-phone-id="${phone.id}">
-          <a href="#!/phones/${phone.id}" class="thumb" data-element="phone-link">
-            <img alt="${phone.name}" src="${phone.imageUrl}">
-          </a>
-          <a href="#!/phones/${phone.id}" data-element="phone-link">${phone.name}</a>
-          <p>${phone.snippet}</p>
-        </li>
-      `;
+    let templateFunction = _.template(this._template);
+    let html = templateFunction({
+      phones: phones
     });
-
-    html += '</ul>';
 
     this._el.innerHTML = html;
   }

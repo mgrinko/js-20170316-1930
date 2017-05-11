@@ -62,8 +62,36 @@
   </div>
 </div>
 
+<script type="text/template" id="phone-catalogue-template">
+  <ul class="phones">
+
+    <% phones.forEach((phone) => { %>
+      <li class="thumbnail"
+          data-element="phone-item"
+          data-phone-id="<%= phone.id %>">
+
+        <a href="#!/phones/<%= phone.id %>"
+           class="thumb"
+           data-element="phone-link">
+
+          <img alt="<%= phone.name %>"
+               src="<%= phone.imageUrl %>">
+        </a>
+
+        <a href="#!/phones/<%= phone.id %>"
+           data-element="phone-link">
+          <%= phone.name %>
+        </a>
+
+        <p><%= phone.snippet %></p>
+      </li>
+    <% }); %>
+
+  </ul>
+</script>
+
 <script type="text/template" id="shopping-cart-template">
-  <h4>Shopping cart</h4>
+  <h4><%= title %></h4>
   <ul>
     <% items.forEach((item) => { %>
       <li><%= item.id %></li>
@@ -73,7 +101,6 @@
   <% if (items.length === 0) { %>
     <p>No items yet</p>
   <% } %>
-
 </script>
 
 

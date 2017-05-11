@@ -172,10 +172,10 @@ class PhoneCatalogue {
     phones.forEach((phone) => {
       html += `
         <li class="thumbnail" data-element="phone-item" data-phone-id="${phone.id}">
-          <a href="#!/phones/${phone.id}" class="thumb">
+          <a href="#!/phones/${phone.id}" class="thumb" data-element="phone-link">
             <img alt="${phone.name}" src="${phone.imageUrl}">
           </a>
-          <a href="#!/phones/${phone.id}">${phone.name}</a>
+          <a href="#!/phones/${phone.id}" data-element="phone-link">${phone.name}</a>
           <p>${phone.snippet}</p>
         </li>
       `;
@@ -187,15 +187,16 @@ class PhoneCatalogue {
   }
 
   _onPhoneClick(event) {
-    let phoneItem = event.target.closest('[data-element="phone-item"]');
+    let phoneLink = event.target.closest('[data-element="phone-link"]');
 
-    if (!phoneItem) {
+    if (!phoneLink) {
       return;
     }
 
+    let phoneItem = phoneLink.closest('[data-element="phone-item"]');
     let phoneId = phoneItem.dataset.phoneId;
 
-    alert(phoneId)
+    alert(phoneId);
   }
 
   _getPhones() {

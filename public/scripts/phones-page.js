@@ -13,7 +13,7 @@ class PhonesPage {
       cart: this._cart
     });
 
-    this._catalogue._el.addEventListener('phoneSelected', (event) => {
+    this._catalogue.on('phoneSelected', (event) => {
       let phoneDetails = { id: event.detail };
 
       this._cart.addItem(phoneDetails);

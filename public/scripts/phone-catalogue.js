@@ -166,6 +166,14 @@ class PhoneCatalogue {
     this._el.addEventListener('click', this._onPhoneClick.bind(this))
   }
 
+  on(eventName, handler) {
+    this._el.addEventListener(eventName, handler);
+  }
+
+  off(eventName, handler) {
+    this._el.removeEventListener(eventName, handler);
+  }
+
   render(phones) {
     let html = '<ul class="phones">';
 
@@ -205,7 +213,6 @@ class PhoneCatalogue {
     });
 
     this._el.dispatchEvent(myEvent);
-
   }
 
   _getPhones() {

@@ -7,6 +7,7 @@ class PhoneViewer extends Component {
     this._template = document.querySelector('#phone-viewer-template').innerHTML;
 
     this._el.addEventListener('click', this._onBackClick.bind(this));
+    this._el.addEventListener('click', this._onAddToBasketClick.bind(this));
   }
 
   showPhone(phoneDetails) {
@@ -31,5 +32,14 @@ class PhoneViewer extends Component {
     }
 
     this.trigger('back');
+  }
+
+
+  _onAddToBasketClick(event) {
+    if (!event.target.closest('[data-element="add-to-basket"]')) {
+      return;
+    }
+
+    this.trigger('add', this.phone);
   }
 }

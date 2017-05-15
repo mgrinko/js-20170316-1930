@@ -28,5 +28,9 @@ class PhonesPage {
       this._viewer.hide();
       this._catalogue.show();
     });
+
+    this._viewer.on('add', (event) => {
+      this._cart.addItem(event.detail)
+    });
   }
 }

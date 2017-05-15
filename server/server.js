@@ -4,19 +4,22 @@ var file = new static.Server('.', {
   cache: 0
 });
 
-function accept(req, res) {
-  if (req.url.indexOf('/data/') === 0) {
+function accept(request, response) {
+  file.serve(request, response);
 
-    setTimeout(function() {
-      file.serve(req, res);
-    }, 3000);
 
-  } else {
-
-    req.url = '/public' + req.url;
-    file.serve(req, res);
-
-  }
+  // if (request.url.indexOf('/data/') === 0) {
+  //
+  //   setTimeout(function() {
+  //     file.serve(request, response);
+  //   }, 500);
+  //
+  // } else {
+  //
+  //   request.url = '/public' + request.url;
+  //   file.serve(request, response);
+  //
+  // }
 }
 
 http.createServer(accept).listen(3000);

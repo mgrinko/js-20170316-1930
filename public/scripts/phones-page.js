@@ -38,19 +38,25 @@ class PhonesPage {
   getPhoneDetails(phoneId) {
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', `/data/phones/${phoneId}.json`, true);
+    xhr.open('GET', `/data/phones/${phoneId}.json`, false);
 
-    xhr.onload = () => {
-      if (xhr.status != 200) {
-        alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
-      } else {
-        console.log( JSON.parse(xhr.responseText) ); // responseText -- текст ответа.
-      }
-    };
+    // xhr.onload = () => {
+    //   if (xhr.status != 200) {
+    //     alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+    //   } else {
+    //     console.log( JSON.parse(xhr.responseText) ); // responseText -- текст ответа.
+    //   }
+    // };
 
 
     xhr.send();
 
+    if (xhr.status != 200) {
+      alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+    } else {
+      console.log( JSON.parse(xhr.responseText) ); // responseText -- текст ответа.
 
+      return JSON.parse(xhr.responseText);
+    }
   }
 }

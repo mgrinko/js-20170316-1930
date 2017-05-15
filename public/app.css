@@ -45,7 +45,6 @@ img.phone {
   padding: 2em;
   height: 400px;
   width: 400px;
-  display: none;
 }
 
 img.phone:first-child {

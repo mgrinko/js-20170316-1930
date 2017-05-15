@@ -18,7 +18,8 @@ class PhonesPage {
     });
 
     this._catalogue.on('phoneSelected', (event) => {
-      let phoneDetails = { id: event.detail };
+      let phoneId = event.detail;
+      let phoneDetails = this.getPhoneDetails(phoneId);
 
       this._catalogue.hide();
       this._viewer.showPhone(phoneDetails);
@@ -32,5 +33,24 @@ class PhonesPage {
     this._viewer.on('add', (event) => {
       this._cart.addItem(event.detail)
     });
+  }
+
+  getPhoneDetails(phoneId) {
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', `/data/phones/${phoneId}.json`, true);
+
+    xhr.onload = () => {
+      if (xhr.status != 200) {
+        alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+      } else {
+        console.log( JSON.parse(xhr.responseText) ); // responseText -- текст ответа.
+      }
+    };
+
+
+    xhr.send();
+
+
   }
 }

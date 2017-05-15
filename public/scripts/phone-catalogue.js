@@ -183,6 +183,10 @@ class PhoneCatalogue {
     this._el.dispatchEvent(myEvent);
   }
 
+  hide() {
+    this._el.classList.add('js-hidden');
+  }
+
   render(phones) {
     let templateFunction = _.template(this._template);
     let html = templateFunction({

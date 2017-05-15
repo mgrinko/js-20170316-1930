@@ -39,19 +39,9 @@ class PhoneCatalogue extends Component {
   }
 
   _loadPhones() {
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('GET', `/data/phones/phones.json`, true);
-
-    xhr.onload = () => {
-      if (xhr.status !== 200) {
-        alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
-      } else {
-        this._phones = JSON.parse(xhr.responseText);
-        this.render();
-      }
-    };
-
-    xhr.send();
+    HTTPService.sendRequest(`/data/phones/phones.json`, (phones) => {
+      this._phones = phones;
+      this.render();
+    });
   }
 }

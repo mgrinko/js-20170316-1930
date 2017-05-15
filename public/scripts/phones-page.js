@@ -17,13 +17,7 @@ class PhonesPage {
       el: this._el.querySelector('[data-component="phone-viewer"]'),
     });
 
-    this._catalogue.on('phoneSelected', (event) => {
-      let phoneId = event.detail;
-      let phoneDetails = this.getPhoneDetails(phoneId);
-
-      this._catalogue.hide();
-      this._viewer.showPhone(phoneDetails);
-    });
+    this._catalogue.on('phoneSelected', this._onPhoneSelected.bind(this));
 
     this._viewer.on('back', (event) => {
       this._viewer.hide();
@@ -35,28 +29,23 @@ class PhonesPage {
     });
   }
 
-  getPhoneDetails(phoneId) {
+  _onPhoneSelected(event) {
+    let phoneId = event.detail;
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', `/data/phones/${phoneId}.json`, false);
+    xhr.open('GET', `/data/phones/${phoneId}.json`, true);
 
-    // xhr.onload = () => {
-    //   if (xhr.status != 200) {
-    //     alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
-    //   } else {
-    //     console.log( JSON.parse(xhr.responseText) ); // responseText -- текст ответа.
-    //   }
-    // };
+    xhr.onload = () => {
+      if (xhr.status !== 200) {
+        alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+      } else {
+        let phoneDetails = JSON.parse(xhr.responseText);
 
+        this._catalogue.hide();
+        this._viewer.showPhone(phoneDetails);
+      }
+    };
 
     xhr.send();
-
-    if (xhr.status != 200) {
-      alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
-    } else {
-      console.log( JSON.parse(xhr.responseText) ); // responseText -- текст ответа.
-
-      return JSON.parse(xhr.responseText);
-    }
   }
 }

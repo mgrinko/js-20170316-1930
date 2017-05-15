@@ -1,8 +1,8 @@
 'use strict';
 
-class ShoppingCart {
+class ShoppingCart extends Component {
   constructor(options) {
-    this._el = options.el;
+    super(options.el);
 
     this._template = options.template;
 

@@ -23,5 +23,10 @@ class PhonesPage {
       this._catalogue.hide();
       this._viewer.showPhone(phoneDetails);
     });
+
+    this._viewer.on('back', (event) => {
+      this._viewer.hide();
+      this._catalogue.show();
+    });
   }
 }

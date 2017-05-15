@@ -1,9 +1,12 @@
 'use strict';
 
-class PhoneViewer {
+class PhoneViewer extends Component {
   constructor(options) {
-    this._el = options.el;
+    super(options.el);
+
     this._template = document.querySelector('#phone-viewer-template').innerHTML;
+
+    this._el.addEventListener('click', this._onBackClick.bind(this));
   }
 
   showPhone(phoneDetails) {
@@ -13,10 +16,6 @@ class PhoneViewer {
     this._render();
   }
 
-  show() {
-    this._el.classList.remove('js-hidden');
-  }
-
   _render() {
     let templateFunction = _.template(this._template);
     let html = templateFunction({
@@ -24,5 +23,13 @@ class PhoneViewer {
     });
 
     this._el.innerHTML = html;
+  }
+
+  _onBackClick(event) {
+    if (!event.target.closest('[data-element="back-button"]')) {
+      return;
+    }
+
+    this.trigger('back');
   }
 }

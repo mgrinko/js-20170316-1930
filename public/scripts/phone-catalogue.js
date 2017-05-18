@@ -29,6 +29,12 @@ class PhoneCatalogue extends Component {
     let selectedPhoneId = phoneItemElement.dataset.phoneId;
 
     this.trigger('phoneSelected', selectedPhoneId);
+
+    phoneItemElement.onmouseleave = () => {
+      this.trigger('extraAction');
+
+      phoneItemElement.onmouseleave = null;
+    };
   }
 
   _render() {

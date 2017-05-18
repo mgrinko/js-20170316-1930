@@ -1,10 +1,10 @@
 'use strict';
 
-class ShoppingCart extends Component {
+class ShoppingCart {
   constructor(options) {
-    super(options.el);
-
-    this._template = options.template;
+    this._el = options.el;
+    this._template = document.querySelector('#shopping-cart-template').innerHTML;
+    this._templateFunction = _.template(this._template);
 
     this._items = [];
 
@@ -12,8 +12,7 @@ class ShoppingCart extends Component {
   }
 
   render() {
-    let templateFunction = _.template(this._template);
-    let html = templateFunction({
+    let html = this._templateFunction({
       title: 'My shopping cart',
       items: this._items
     });

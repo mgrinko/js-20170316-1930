@@ -5,12 +5,11 @@ class PhonesPage {
     this._el = options.el;
 
     this._cart = new ShoppingCart({
-      el: this._el.querySelector('[data-component="shopping-cart"]'),
-      template: document.querySelector('#shopping-cart-template').innerHTML
+      el: this._el.querySelector('[data-component="shopping-cart"]')
     });
 
     this._catalogue = new PhoneCatalogue({
-      el: this._el.querySelector('[data-component="phone-catalogue"]')
+      el: this._el.querySelector('[data-component="phone-catalogue"]'),
     });
 
     this._viewer = new PhoneViewer({
@@ -19,20 +18,22 @@ class PhonesPage {
 
     this._catalogue.on('phoneSelected', this._onPhoneSelected.bind(this));
 
-    this._viewer.on('back', (event) => {
+    this._viewer.on('back', () => {
       this._viewer.hide();
       this._catalogue.show();
     });
 
     this._viewer.on('add', (event) => {
-      this._cart.addItem(event.detail)
+      let phoneDetails = event.detail;
+
+      this._cart.addItem(phoneDetails);
     });
   }
 
   _onPhoneSelected(event) {
     let phoneId = event.detail;
 
-    HTTPService.sendRequest(`/data/phones/${phoneId}.json`, (phoneDetails) => {
+    HttpService.getJSON(`/data/phones/${phoneId}.json`, (phoneDetails) => {
       this._catalogue.hide();
       this._viewer.showPhone(phoneDetails);
     });

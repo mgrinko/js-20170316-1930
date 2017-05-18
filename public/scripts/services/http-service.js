@@ -1,14 +1,16 @@
-class HTTPService {
-  static sendRequest(url, successHandler, method = 'GET') {
+class HttpService {
+  static getJSON(url, successHandler) {
     let xhr = new XMLHttpRequest();
 
-    xhr.open(method, url, true);
+    xhr.open('GET', url, true);
 
     xhr.onload = () => {
       if (xhr.status !== 200) {
         alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
       } else {
-        successHandler(JSON.parse(xhr.responseText));
+        let data = JSON.parse(xhr.responseText);
+
+        successHandler(data);
       }
     };
 

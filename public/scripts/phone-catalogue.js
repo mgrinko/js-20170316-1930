@@ -4,21 +4,13 @@ class PhoneCatalogue extends Component {
   constructor(options) {
     super(options.el);
 
-    this._phones = [];
+    this._el = options.el;
     this._template = document.querySelector('#phone-catalogue-template').innerHTML;
+    this._templateFunction = _.template(this._template);
+
+    this._el.addEventListener('click', this._onPhoneClick.bind(this));
 
     this._loadPhones();
-
-    this._el.addEventListener('click', this._onPhoneClick.bind(this))
-  }
-
-  render() {
-    let templateFunction = _.template(this._template);
-    let html = templateFunction({
-      phones: this._phones
-    });
-
-    this._el.innerHTML = html;
   }
 
   _onPhoneClick(event) {
@@ -28,20 +20,24 @@ class PhoneCatalogue extends Component {
       return;
     }
 
-    let phoneElement = phoneLink.closest('[data-element="phone-item"]');
-    let phoneId = phoneElement.dataset.phoneId;
+    let phoneItemElement = phoneLink.closest('[data-element="phone-item"]');
+    let selectedPhoneId = phoneItemElement.dataset.phoneId;
 
-    // let selectedPhone = phonesFromServer
-    //   .filter(phone => phone.id === phoneId)
-    //   [0];
+    this.trigger('phoneSelected', selectedPhoneId);
+  }
 
-    this.trigger('phoneSelected', phoneId)
+  _render() {
+    let html = this._templateFunction({
+      phones: this._phones
+    });
+
+    this._el.innerHTML = html;
   }
 
   _loadPhones() {
-    HTTPService.sendRequest(`/data/phones/phones.json`, (phones) => {
+    HttpService.getJSON(`/data/phones/phones.json`, (phones) => {
       this._phones = phones;
-      this.render();
+      this._render();
     });
   }
 }

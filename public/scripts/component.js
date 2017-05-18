@@ -1,6 +1,6 @@
 class Component {
-  constructor(element) {
-    this._el = element;
+  constructor(rootElement) {
+    this._el = rootElement;
   }
 
   on(eventName, handler) {

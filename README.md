@@ -3,4 +3,4 @@
 npm install
 npm start
 
-open: localhost:3000/public
+open: localhost:3000

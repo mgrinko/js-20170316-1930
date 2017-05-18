@@ -1,5 +1,5 @@
 class HttpService {
-  static getJSON(url, successHandler) {
+  static getJSON(url, successCallback) {
     let xhr = new XMLHttpRequest();
 
     xhr.open('GET', url, true);
@@ -10,7 +10,7 @@ class HttpService {
       } else {
         let data = JSON.parse(xhr.responseText);
 
-        successHandler(data);
+        successCallback(data);
       }
     };
 

@@ -1,19 +1,31 @@
 class HttpService {
-  static getJSON(url, successCallback) {
-    let xhr = new XMLHttpRequest();
+  static getJSON(url) {
+    return new Promise(
+      (resolve, reject) => {
 
-    xhr.open('GET', url, true);
 
-    xhr.onload = () => {
-      if (xhr.status !== 200) {
-        alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
-      } else {
-        let data = JSON.parse(xhr.responseText);
+        let xhr = new XMLHttpRequest();
 
-        successCallback(data);
+        xhr.open('GET', url, true);
+
+        xhr.onload = () => {
+          if (xhr.status !== 200) {
+            reject( xhr.status + ': ' + xhr.statusText );
+          } else {
+            let data = JSON.parse(xhr.responseText);
+
+            resolve(data);
+          }
+        };
+
+        xhr.onerror = (error) => {
+          reject(error)
+        };
+
+        xhr.send();
+
+
       }
-    };
-
-    xhr.send();
+    );
   }
 }

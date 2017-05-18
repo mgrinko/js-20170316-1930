@@ -40,46 +40,49 @@ class PhonesPage {
 
       this._loadPhones(searchValue);
     });
-
-    this._onExtraAction = this._onExtraAction.bind(this);
   }
 
   _onPhoneSelected(event) {
-    this._selectedPhoneId = event.detail;
+    let phoneId = event.detail;
+    let loadPhonePromise = HttpService.getJSON(`/data/phones/${phoneId}.json`);
 
-    this._extraActionHappened = false;
+    let extraActionPromise = new Promise(
+      (resolve, reject) => {
 
-    this._catalogue.on('extraAction', this._onExtraAction);
-    this._loadPhoneDetails(this._selectedPhoneId);
-  }
+        let onExtraAction = () => {
+          resolve();
 
-  _onExtraAction() {
-    this._extraActionHappened = true;
+          this._catalogue.off('extraAction', onExtraAction);
+        };
 
-    if (this._selectedPhoneDetails) {
-      this._showLoadedPhone(this._selectedPhoneDetails);
-    }
+        this._catalogue.on('extraAction', onExtraAction);
 
-    this._catalogue.off('extraAction', this._onExtraAction);
-  }
-
-  _loadPhoneDetails(phoneId) {
-    HttpService.getJSON(`/data/phones/${phoneId}.json`, (phoneDetails) => {
-      this._selectedPhoneDetails = phoneDetails;
-
-      if (this._extraActionHappened) {
-        this._showLoadedPhone(this._selectedPhoneDetails);
       }
-    });
-  }
+    );
 
-  _showLoadedPhone(phoneDetails) {
-    this._catalogue.hide();
-    this._viewer.showPhone(this._selectedPhoneDetails);
+    Promise.all([extraActionPromise, loadPhonePromise])
+      .then(
+        (results) => {
+          let phoneDetails = results[1];
 
-    this._extraActionHappened = false;
-    this._selectedPhoneDetails = null;
-    this._selectedPhoneId = null;
+          this._catalogue.hide();
+          this._viewer.showPhone(phoneDetails);
+        }
+      );
+
+    // extraActionPromise
+    //   .then(() => loadPhonePromise)
+    //   .then((phoneDetails) => {
+    //     this._catalogue.hide();
+    //     this._viewer.showPhone(phoneDetails);
+    //   });
+    //
+    // extraActionPromise.then(() => {
+    //   loadPhonePromise.then((phoneDetails) => {
+    //     this._catalogue.hide();
+    //     this._viewer.showPhone(phoneDetails);
+    //   });
+    // });
   }
 
   _loadPhones(query) {
@@ -89,12 +92,15 @@ class PhonesPage {
       url += `?query=${query}`
     }
 
-    HttpService.getJSON(url, (phones) => {
-      // until our server can filter phones
-      let filteredPhones = this._filterPhones(phones, query);
+    HttpService.getJSON(url)
+      .then(
+        (phones) => {
+          // until our server can filter phones
+          let filteredPhones = this._filterPhones(phones, query);
 
-      this._catalogue.showPhones(filteredPhones);
-    });
+          this._catalogue.showPhones(filteredPhones);
+        }
+      );
   }
 
   _filterPhones(phones, query) {

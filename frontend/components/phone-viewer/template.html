@@ -1,0 +1,19 @@
+<button data-element="back-button">back to catalogue</button>
+<button data-element="add-to-basket">add to basket</button>
+
+<img class="phone"
+     src="<%= phone.images[0] %>">
+
+<h1><%= phone.name %></h1>
+
+<p><%= phone.description %></p>
+
+<ul class="phone-thumbs">
+  <% phone.images.forEach(imageLink => { %>
+
+  <li>
+    <img src="<%= imageLink %>">
+  </li>
+
+  <% }); %>
+</ul>

@@ -1,0 +1,15 @@
+<h4><%= title %></h4>
+
+<% if (items.length) { %>
+
+<ul>
+  <% items.forEach(item => { %>
+  <li>${ item.id }</li>
+  <% }); %>
+</ul>
+
+<% } else { %>
+
+<p>No items yet!</p>
+
+<% } %>

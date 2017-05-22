@@ -9,7 +9,7 @@ function accept(request, response) {
 
     setTimeout(() => {
       file.serve(request, response);
-    }, 3000);
+    }, 100);
 
   } else {
     request.url = '/public' + request.url;

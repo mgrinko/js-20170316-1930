@@ -1,13 +1,13 @@
 'use strict';
 
-import { Component } from './component';
+import { Component } from './../../component';
 
 export class PhoneCatalogue extends Component {
   constructor(options) {
     super(options.el);
 
     this._el = options.el;
-    this._template = document.querySelector('#phone-catalogue-template').innerHTML;
+    this._template = require('./template.html');
     this._templateFunction = _.template(this._template);
 
     this._el.addEventListener('click', this._onPhoneClick.bind(this));

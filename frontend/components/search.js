@@ -1,6 +1,6 @@
 'use strict';
 
-import { Component } from './component';
+import { Component } from './../component';
 
 export class Search extends Component {
   constructor({ el, delay = 300 }) {

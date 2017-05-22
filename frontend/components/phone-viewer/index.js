@@ -1,12 +1,12 @@
 'use strict';
 
-import { Component } from './component';
+import { Component } from './../../component';
 
 export class PhoneViewer extends Component {
   constructor(options) {
     super(options.el);
 
-    this._template = document.querySelector('#phone-viewer-template').innerHTML;
+    this._template = require('./template.html');
 
     this._el.addEventListener('click', this._onBackClick.bind(this));
     this._el.addEventListener('click', this._onAddToBasketClick.bind(this));

@@ -1,9 +1,9 @@
 'use strict';
 
-import { Search } from './search';
-import { PhoneViewer } from './phone-viewer';
-import { PhoneCatalogue } from './phone-catalogue';
-import { ShoppingCart } from './shopping-cart';
+import { Search } from './components/search';
+import { PhoneViewer } from './components/phone-viewer';
+import { PhoneCatalogue } from './components/phone-catalogue';
+import { ShoppingCart } from './components/shopping-cart';
 import { HttpService } from './services/http-service';
 
 export class PhonesPage {

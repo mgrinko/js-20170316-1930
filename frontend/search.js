@@ -1,6 +1,8 @@
 'use strict';
 
-class Search extends Component {
+import { Component } from './component';
+
+export class Search extends Component {
   constructor({ el, delay = 300 }) {
     super(el);
 

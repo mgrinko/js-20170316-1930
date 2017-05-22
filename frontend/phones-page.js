@@ -1,6 +1,12 @@
 'use strict';
 
-class PhonesPage {
+import { Search } from './search';
+import { PhoneViewer } from './phone-viewer';
+import { PhoneCatalogue } from './phone-catalogue';
+import { ShoppingCart } from './shopping-cart';
+import { HttpService } from './services/http-service';
+
+export class PhonesPage {
   constructor(options) {
     this._el = options.el;
 

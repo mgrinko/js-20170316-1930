@@ -1,6 +1,8 @@
 'use strict';
 
-class PhoneCatalogue extends Component {
+import { Component } from './component';
+
+export class PhoneCatalogue extends Component {
   constructor(options) {
     super(options.el);
 

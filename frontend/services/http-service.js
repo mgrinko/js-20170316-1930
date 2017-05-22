@@ -1,4 +1,4 @@
-class HttpService {
+export class HttpService {
   static getJSON(url) {
     return new Promise(
       (resolve, reject) => {

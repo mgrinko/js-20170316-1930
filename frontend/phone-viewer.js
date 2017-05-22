@@ -1,6 +1,8 @@
 'use strict';
 
-class PhoneViewer extends Component {
+import { Component } from './component';
+
+export class PhoneViewer extends Component {
   constructor(options) {
     super(options.el);
 

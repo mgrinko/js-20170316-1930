@@ -1,4 +1,4 @@
-class Component {
+export class Component {
   constructor(rootElement) {
     this._el = rootElement;
   }
@@ -12,7 +12,7 @@ class Component {
   }
 
   trigger(eventName, data) {
-    var myEvent = new CustomEvent(eventName, {
+    let myEvent = new CustomEvent(eventName, {
       detail: data
     });
 

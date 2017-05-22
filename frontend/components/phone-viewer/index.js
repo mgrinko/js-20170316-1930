@@ -1,5 +1,6 @@
 'use strict';
 
+import template from 'lodash.template';
 import { Component } from './../../component';
 
 export class PhoneViewer extends Component {
@@ -20,7 +21,7 @@ export class PhoneViewer extends Component {
   }
 
   _render() {
-    let templateFunction = _.template(this._template);
+    let templateFunction = template(this._template);
     let html = templateFunction({
       phone: this._phone
     });

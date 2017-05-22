@@ -1,5 +1,8 @@
 'use strict';
 
+import './styles.css';
+
+import templateFunction from './template.hbs';
 import { Component } from './../../component';
 
 export class PhoneCatalogue extends Component {
@@ -7,8 +10,6 @@ export class PhoneCatalogue extends Component {
     super(options.el);
 
     this._el = options.el;
-    this._template = require('./template.html');
-    this._templateFunction = _.template(this._template);
 
     this._el.addEventListener('click', this._onPhoneClick.bind(this));
   }
@@ -40,7 +41,7 @@ export class PhoneCatalogue extends Component {
   }
 
   _render() {
-    let html = this._templateFunction({
+    let html = templateFunction({
       phones: this._phones
     });
 

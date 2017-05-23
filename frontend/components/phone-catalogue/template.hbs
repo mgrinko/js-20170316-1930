@@ -1,26 +1,3 @@
 <ul class="phones">
 
-  {{#each phones as |phone index|}}
-  <li class="thumbnail"
-      data-element="phone-item"
-      data-phone-id="{{ phone.id }}">
-
-    <a href="#!/phones/{{ phone.id }}"
-       class="thumb"
-       data-element="phone-link">
-
-      <img alt="{{ phone.name }}"
-           src="{{ phone.imageUrl }}">
-    </a>
-
-    <a href="#!/phones/{{ phone.id }}"
-       data-element="phone-link">
-      {{ phone.name }}
-    </a>
-
-    <p>{{ phone.snippet }}</p>
-
-  </li>
-  {{/each}}
-
 </ul>

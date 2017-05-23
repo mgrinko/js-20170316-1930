@@ -3,6 +3,7 @@
 import './styles.css';
 
 import templateFunction from './template.hbs';
+import phoneTemplateFunction from './phone-template.hbs';
 import { Component } from './../../component';
 
 export class PhoneCatalogue extends Component {
@@ -12,13 +13,25 @@ export class PhoneCatalogue extends Component {
     this._el = options.el;
 
     this._el.addEventListener('click', this._onPhoneClick.bind(this));
+
+    this._render();
+    this._list = this._el.querySelector('ul');
   }
 
   showPhones(phones) {
+    this.clear();
+
     this._phones = phones;
 
-    this._render();
+    this._phones.forEach((phone) => {
+      this._renderPhone(phone);
+    });
+
     this.show();
+  }
+
+  clear() {
+    this._list.innerHTML = '';
   }
 
   _onPhoneClick(event) {
@@ -41,11 +54,18 @@ export class PhoneCatalogue extends Component {
   }
 
   _render() {
-    let html = templateFunction({
-      phones: this._phones
-    });
+    let html = templateFunction({});
 
     this._el.innerHTML = html;
   }
+
+  _renderPhone(phone) {
+    let phoneHTML = phoneTemplateFunction({
+      phone: phone
+    });
+
+    this._list.insertAdjacentHTML('beforeEnd', phoneHTML)
+  }
+
 
 }

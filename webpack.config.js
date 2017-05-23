@@ -3,9 +3,12 @@ let webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  entry: './frontend/app.js',
+  entry: {
+    app: './frontend/app.js',
+    login: './frontend/login.js'
+  },
   output: {
-    filename: 'build.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'public')
   },
 
@@ -40,7 +43,14 @@ module.exports = {
 
   },
 
+
+
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "common",
+      minChunks: 2,
+    }),
+
     new UglifyJSPlugin({
       sourceMap: true
     })

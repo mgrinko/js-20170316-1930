@@ -18,6 +18,10 @@ export class PhoneCatalogue extends Component {
     this._list = this._el.querySelector('ul');
   }
 
+  /**
+   *
+   * @param {array} phones - phones to show
+   */
   showPhones(phones) {
     this.clear();
 
@@ -64,7 +68,7 @@ export class PhoneCatalogue extends Component {
       phone: phone
     });
 
-    this._list.insertAdjacentHTML('beforeEnd', phoneHTML)
+    this._list.insertAdjacentHTML('beforeEnd', phoneHTML);
   }
 
 

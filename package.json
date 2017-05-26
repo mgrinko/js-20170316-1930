@@ -23,6 +23,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.5.1",
     "css-loader": "^0.28.2",
+    "eslint": "^3.19.0",
     "node-static": "^0.7.9",
     "raw-loader": "^0.5.1",
     "style-loader": "^0.18.0",
